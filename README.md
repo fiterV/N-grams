@@ -1,5 +1,7 @@
 # N-Grams project
 
+Поки що лише для Python3
+
 Лінк для клонування проекту:
 https://github.com/d-zakharchuk/N-grams.git
 * Після кнонування потрібно створити віртуальне середовище (virtual environment)
