@@ -5,6 +5,13 @@
 Лінк для клонування проекту:
 https://github.com/d-zakharchuk/N-grams.git
 
+Як оновити проект:
+* Відкрийте Terminal у PyCharm (Alt+F12)
+* Уведіть команду:
+```
+git pull -- rebase
+```
+
 Для роботи з базою даних потрібно встановити **DB Browser for SQLite**. Завантажити можна тут: https://sqlitebrowser.org/
 
 Див. файл **_docs\How to run N-grams project.pdf_** з інструкцією щодо запуску проекту.
