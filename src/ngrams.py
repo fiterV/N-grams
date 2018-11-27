@@ -187,7 +187,11 @@ class Ngrams:
         # значення: список у форматі:[скільки N-грам є в корпусі для цієї частоти,
         # згладжена кількість за Гудом-Тюрінгом (Good-Turing counts re_estimation) ]
         gt_counts = dict()
-        for c in range(max(n_c.keys()) + 1):
+        m = max(n_c.keys())
+        if k > m:
+            for i in range(m + 1, k + 2):
+                n_c[i] = 0
+        for c in range(m + 1):
             # за формулою 6.29 на сторінці 214 (239 в рідері) книжки Журафського
             if 0 <= c <= k:
                 estimated_count = (((c + 1) * (n_c[c + 1]) / (n_c[c])) - ((n_c[k + 1] * c * (k + 1)) / n_c[1])) \
