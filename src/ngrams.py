@@ -1,5 +1,5 @@
 import re
-
+import csv
 from nltk.tokenize import sent_tokenize
 from nltk.util import ngrams
 
@@ -52,6 +52,12 @@ class Ngrams:
         vocab_freq = self.freq_table_db(vocab_dict)
         gt_estimation_table_db = self.gt_table_db(gt_counts_estimation)
         smoothing_table_db = self.freq_table_db(smoothing_params)
+        # збереження даних до csv-файлу
+        self.write_to_csv("../csv_files/ngrams.csv", ngrams_freq)
+        self.write_to_csv("../csv_files/n_minus1_grams.csv", n_minus1_grams_freq)
+        self.write_to_csv("../csv_files/witten-bell.csv", smoothing_table_db)
+        self.write_to_csv("../csv_files/good-turing.csv", gt_estimation_table_db)
+
 
         # додавання даних відповідних таблиць до бази
         db.add_freq_data(ngrams_freq, db.tables_names["ngrams frequency table"])
@@ -60,6 +66,13 @@ class Ngrams:
         db.add_gt_estimation_data(gt_estimation_table_db)
         db.add_smoothing_data(smoothing_table_db)
         return gt_estimation_table_db
+
+    @staticmethod
+    def write_to_csv(filename, data):
+        with open(filename, mode='w', newline='') as f:
+            csv_writer = csv.writer(f, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            for row in data:
+                csv_writer.writerow(row)
 
     def get_sentences_words(self, paragraphs):
         """
