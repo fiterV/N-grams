@@ -103,7 +103,7 @@ class Database:
             INSERT OR IGNORE INTO {0}(word, freq)
             VALUES(?,?)""".format(table)
             self.cursor.execute(sql_command, record)
-        self.cursor.execute("COMMIT")
+        self.connection.commit()
 
     def add_gt_estimation_data(self, data):
         """
@@ -119,7 +119,7 @@ class Database:
             INSERT OR IGNORE INTO {0}(freq, count_, gt_count)
             VALUES(?,?,?)""".format(self.tables_names["Good-Turing estimation table"])
             self.cursor.execute(sql_command, record)
-        self.cursor.execute("COMMIT")
+        self.connection.commit()
 
     def add_smoothing_data(self, data):
         """
@@ -134,7 +134,7 @@ class Database:
             INSERT OR IGNORE INTO {0}(n_minus1_gram, ngrams_types_count_)
             VALUES(?,?)""".format(self.tables_names["Smoothing"])
             self.cursor.execute(sql_command, record)
-        self.cursor.execute("COMMIT")
+        self.connection.commit()
 
     def load_gt_estimation_data(self):
         """
